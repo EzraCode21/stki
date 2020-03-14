@@ -28,7 +28,7 @@ for docs in docTokens:
     doc = docs.replace("-"," ")
     doc = re.split('<[^>]*>|\n\t|\n|\d{15}|[A-Z]{0,3}\-\d|\s|\,|\.|"|\\x94|\\x93|\d|\/|\(|\)|\!|\@|\#|\%|\?|\[|\]', doc)
     for word in doc:
-        if word != '' and len(word) > 2:
+        if word != '' and len(word) > 3:
             docToken.write(word + " ")
     docToken.write("\n")
 

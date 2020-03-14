@@ -12,6 +12,7 @@ stemLib = []
 text = open("corpus.txt", encoding="ISO-8859-1").read()
 stopWords = open("stopWord.txt","r")
 fileOpen = open("token.txt","w", encoding="ISO-8859-1")
+docToken = open("docToken.txt","w", encoding="ISO-8859-1")
 stemLibrary = open("stemLibrary.txt", encoding="cp1252").read()
 
 for word in stemLibrary:
@@ -20,6 +21,16 @@ for word in stemLibrary:
 for word in stopWords:
     word = word.replace("\n","")
     stopList.append(word)
+
+#mengambil kalimat didalam tag <TITLE> dan <TEXT> pada seluruh corpus
+docTokens = re.split('<DOC>', text)
+for docs in docTokens:
+    doc = docs.replace("-"," ")
+    doc = re.split('<[^>]*>|\n\t|\n|\d{15}|[A-Z]{0,3}\-\d|\s|\,|\.|"|\\x94|\\x93|\d|\/|\(|\)|\!|\@|\#|\%|\?|\[|\]', doc)
+    for word in doc:
+        if word != '' and len(word) > 2:
+            docToken.write(word + " ")
+    docToken.write("\n")
 
 def preProcessing(inputText, inputList):
 
